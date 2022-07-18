@@ -1,0 +1,212 @@
+@media (min-width: 767.98px) {
+  .hire-name {
+    width: 50%;
+    .profession {
+      font-family: "Consolas", cursive;
+      font-size: 2rem;
+    }
+    .hire {
+      #Layer_1 {
+        width: 30rem;
+      }
+    }
+  }
+}
+@media (max-width: 767.98px) {
+  .home-container,
+  .about-me-container,
+  .contact-container,
+  .projects-container {
+    flex-direction: column;
+  }
+  .home-container {
+    .tree-background {
+      margin-top: 1rem;
+    }
+    .hire-name {
+      width: 100%;
+      //     border: 0.1rem solid #fff;
+      .profession {
+        font-family: "Consolas", monospace;
+        font-size: 1.5rem;
+      }
+      .hire {
+        #Layer_1 {
+          width: 20rem;
+        }
+      }
+    }
+  }
+}
+main {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .home-container,
+  .about-me-container,
+  .contact-container,
+  .projects-container {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-container {
+    max-width: 100%;
+    background: rgb(0, 0, 0);
+    .scrolldown {
+      position: absolute;
+      bottom: 2rem;
+      width: 1rem;
+      height: 2rem;
+      border: 0.1rem solid #23c483;
+      display: flex;
+      border-radius: 2rem;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 1rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        background-color: #23c483;
+        border-radius: 50%;
+        animation: scroll 2s infinite;
+        box-shadow: 0px -5px 3px 1px #23c48478;
+      }
+      .chevrons {
+        width: 30px;
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .chevrondown {
+          margin-top: -6px;
+          position: relative;
+          border: solid #23c483;
+          border-width: 0 3px 3px 0;
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          transform: rotate(45deg);
+          &:nth-child(odd) {
+            animation: pulse 500ms ease infinite alternate;
+          }
+          &:nth-child(even) {
+            animation: pulse 500ms ease infinite alternate 250ms;
+          }
+        }
+      }
+      @keyframes scroll {
+        0% {
+          opacity: 0;
+        }
+        40% {
+          opacity: 1;
+        }
+        80% {
+          transform: translate(0, 1rem);
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes pulse {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .hire-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: 1s;
+      .hire {
+        transition: 1s;
+        #Layer_1 {
+          transition: 1s;
+        }
+      }
+      .profession {
+        font-weight: 400;
+        color: #fff;
+      }
+      /* From uiverse.io */
+      .contact-btn {
+        padding: 1.3em 3em;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+       // font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        margin-top: 1rem;
+        font-weight: bold;
+        &:hover {
+          background-color: #23c483;
+          box-shadow: 0 15px 20px rgba(46, 229, 157, 0.4);
+          color: #fff;
+          transform: translateY(-7px);
+        }
+
+        &:active {
+          transform: translateY(-1px);
+        }
+      }
+    }
+    .tree-background {
+      width: 50%;
+      height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      //border: 0.1rem solid red;
+      /*  .cls-1 {
+        //fill: #fff;
+        stop-color: #23c483;
+        flood-color: #fff;
+        lighting-color: aqua;
+      } */
+      #Tree {
+        width: 50%;
+      }
+    }
+  }
+  .projects-container {
+    background: #4e9f3d;
+  }
+  .about-me-container {
+    background: #ff0063;
+  }
+  .contact-container {
+    background: #47029c;
+  }
+}
+
+.cls-1 {
+  &:nth-child(n + 2) {
+    stroke: #23c483;
+  }
+  stroke: #fff;
+}
