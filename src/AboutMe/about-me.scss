@@ -280,6 +280,9 @@
       flex-direction: column;
       gap: 0.5rem;
       cursor: pointer;
+      img[alt="MongoDB"] {
+        filter: brightness(0) invert(1);
+      }
     }
   }
 }
