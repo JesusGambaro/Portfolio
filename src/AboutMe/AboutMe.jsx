@@ -92,7 +92,7 @@ const AboutMe = () => {
           technologies, ideas or designs to integrate in all my personal and
           group projects.
         </p>
-        <img src="./Images/profile-me.jpg" alt="me" />
+        <img src="./Images/profile-me.png" alt="me" />
       </div>
 
       <div className="skills-container">
