@@ -165,7 +165,7 @@
   img {
     font-size: 1.5rem;
     border-radius: 35% 65% 54% 46% / 48% 30% 70% 52%;
-    cursor: wait;
+    cursor: help;
     &:hover {
       animation: deformate 5s infinite ease alternate;
     }
@@ -238,7 +238,7 @@
         margin: 1rem 0;
         box-shadow: 0 0 0 1rem #1d1d1d65;
         transition: 0.3s;
-        cursor: pointer;
+        cursor: zoom-in;
       }
       figure {
         position: fixed;

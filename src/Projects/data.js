@@ -3,14 +3,14 @@ const projects = [
     name: "Portfolio",
     id: 1,
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius commodi dolore quae reprehenderit dolores a aperiam est nesciunt, magnam illum harum ducimus aspernatur modi, eum asperiores fugiat, distinctio ut atque!",
+      "Personal: Personal Portfolio / Jul 2022 - Aug 2022. Individual web development of a SPA (Single Page Application) of my portfolio,in process of completion. It has multiple sections, showing my projects, information about me and the possibility to contact me.",
     images: [
       "https://res.cloudinary.com/dsqpyqpnq/image/upload/v1658077811/Portfolio/Portfolio_1.png",
       "https://res.cloudinary.com/dsqpyqpnq/image/upload/v1658077829/Portfolio/Portfolio_3.png",
       "https://res.cloudinary.com/dsqpyqpnq/image/upload/v1658077860/Portfolio/Portfolio_4.png",
     ],
-    link: "http://localhost:3000/",
-    tools: ["React", "Sass", "HTML", "CSS"],
+    link: "https://portfolio-jesusgambaro.vercel.app/",
+    tools: ["React", "Typescript", "Sass", "HTML", "CSS"],
   },
   {
     name: "Pokedex",
@@ -25,7 +25,7 @@ const projects = [
     ],
     link: "https://pokedex-client-deployed.vercel.app",
     github: "https://github.com/JesusGambaro/PI-Pokemon-main",
-    tools: ["React", "PostgreSQL", "Sass", "HTML", "CSS"],
+    tools: ["React", "Nodejs", "Sass", "HTML", "CSS", "PostgreSQL"],
   },
   {
     name: "Henry Shoes",
@@ -40,7 +40,7 @@ const projects = [
     ],
     link: "https://henry-shoes.vercel.app",
     github: "https://github.com/JesusGambaro/PF-Grupo-9",
-    tools: ["React", "PostgreSQL", "Sass", "HTML", "CSS"],
+    tools: ["React", "Nodejs", "PostgreSQL", "Sass", "HTML", "CSS"],
   },
 ];
 export default projects;

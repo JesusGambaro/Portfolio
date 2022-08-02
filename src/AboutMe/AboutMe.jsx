@@ -3,24 +3,25 @@ import {useNavigate} from "react-router-dom";
 import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
 import {ScrollerTop, ScrollerBottom} from "../ScrollDown/Scroller";
-
+import {useSelector, useDispatch} from "react-redux/es/exports";
+import {scrollUp, scrollDown} from "../Redux/stateChanger";
 import "./about-me.scss";
-const boxVariant = {
-  visible: {opacity: 1, y: "0"},
-  hidden: {opacity: 1, y: "-100%"},
-};
 const AboutMe = () => {
   const navigate = useNavigate();
+  const variant = useSelector((state) => state.stateChanger.animation);
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    console.log("AboutMe=> ", variant);
     const elmt = document.getElementsByClassName("about-me-container")[0];
     const listener = (e) => {
       if (e.deltaY < 0) {
-        window.scrollTo({top: 0});
         navigate("/Projects");
+        dispatch(scrollUp());
         elmt.removeEventListener("wheel", listener);
       } else if (e.deltaY > 0) {
-        window.scrollTo({top: 0});
         navigate("/Contact");
+        dispatch(scrollDown());
         elmt.removeEventListener("wheel", listener);
       }
     };
@@ -50,6 +51,7 @@ const AboutMe = () => {
       title: "EFSET's English Certificate",
     },
   ]);
+
   const technologies = [
     {name: "HTML", url: "https://developer.mozilla.org/en/docs/Web/HTML"},
     {name: "CSS", url: "https://developer.mozilla.org/en/docs/Web/CSS"},
@@ -76,15 +78,16 @@ const AboutMe = () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-
+  const [load, setLoad] = useState(false);
   const isMobile = width <= 768;
   return (
     <motion.section
       className="about-me-container"
       ref={ref}
-      variants={boxVariant}
+      variants={variant}
       initial="hidden"
       animate={control}
+      exit="exit"
       transition={{
         x: {type: "spring", stiffness: 50},
         y: {type: "spring", stiffness: 50},
@@ -142,6 +145,8 @@ const AboutMe = () => {
                   alt="henry"
                   className="thumbnail"
                   title={img.title}
+                  style={load ? {} : {visibility: "hidden"}}
+                  onLoad={() => setLoad(true)}
                   onClick={() => {
                     if (!popImg.find((el) => el.show)) {
                       setPopImg(

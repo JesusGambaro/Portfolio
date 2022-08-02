@@ -1,4 +1,11 @@
 @media (min-width: 767.98px) {
+  .home-container {
+    .scrolldown {
+      &::after {
+        font-size: 1.2rem;
+      }
+    }
+  }
   .hire-name {
     width: 50%;
     .profession {
@@ -23,6 +30,11 @@
     .tree-background {
       margin-top: 1rem;
     }
+    .scrolldown {
+      &::after {
+        font-size: 1.5rem;
+      }
+    }
     .hire-name {
       width: 100%;
       //     border: 0.1rem solid #fff;
@@ -40,7 +52,6 @@
 }
 main {
   min-height: 100vh;
-  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,11 +80,11 @@ main {
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      &::after{
-        content: 'Scroll Down';
+      &::after {
+        content: "Go Down";
         color: #23c483;
         word-wrap: normal;
-        font-size: 1rem;
+        font-family: "Consolas", cursive;
         white-space: nowrap;
         word-spacing: normal;
         position: absolute;
@@ -161,7 +172,7 @@ main {
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 2.5px;
-       // font-weight: 500;
+        // font-weight: 500;
         color: #000;
         background-color: #fff;
         border: none;

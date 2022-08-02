@@ -2,27 +2,34 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import projects from "./data";
 import {ScrollerTop, ScrollerBottom} from "../ScrollDown/Scroller";
+import {useSelector, useDispatch} from "react-redux/es/exports";
+import {scrollUp, scrollDown} from "../Redux/stateChanger";
 
 import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
 import "./projects.scss";
 import {Slider} from "../ImageSlider/Slider.tsx";
 import ProjectInfo from "./ProjectInfo";
-const boxVariant = {
-  visible: {opacity: 1, y: "0"},
-  hidden: {opacity: 1, y: "-100%"},
-};
+
 const Projects = () => {
   const navigate = useNavigate();
+  const variant = useSelector((state) => state.stateChanger.animation);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const elmt = document.getElementsByClassName("projects-container")[0];
     const listener = (e) => {
-      if (e.deltaY > 0) navigate("/AboutMe");
-      else if (e.deltaY < 0) navigate("/");
+      if (e.deltaY > 0) {
+        navigate("/AboutMe");
+        dispatch(scrollDown());
+      } else if (e.deltaY < 0) {
+        navigate("/");
+        dispatch(scrollUp());
+      }
       elmt.removeEventListener("wheel", listener);
     };
     elmt.addEventListener("wheel", listener);
-  }, [navigate]);
+  }, [navigate, dispatch, variant]);
   const control = useAnimation();
   const [ref, inView] = useInView();
 
@@ -52,11 +59,11 @@ const Projects = () => {
     <motion.section
       className="projects-container"
       ref={ref}
-      variants={boxVariant}
+      variants={variant}
       initial="hidden"
       animate={control}
       transition={{
-        x: {type: "spring", stiffness: 50},
+        x: {type: "spring", stiffness: 0},
         y: {type: "spring", stiffness: 50},
         default: {duration: ".75"},
       }}
@@ -152,10 +159,10 @@ const Projects = () => {
                 }}
               ></i>
             )}
-            {isMobile && <ScrollerBottom />}
           </motion.div>
         );
       })}
+      {isMobile && <ScrollerBottom />}
     </motion.section>
   );
 };

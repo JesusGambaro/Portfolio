@@ -4,12 +4,10 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {NavLink, useNavigate} from "react-router-dom";
 const Navbar = () => {
-  const navigate = useNavigate();
   const [hamburguer, setHamburguer] = useState(false);
   const style = {
     color: "white",
   };
-  const [height, setHeight] = useState(0);
   const location = useLocation();
   const bgColors = {
     "/": "#000000",
@@ -25,6 +23,8 @@ const Navbar = () => {
         e.style.stroke = "white";
       });
     }
+    document.querySelector("main").style.backgroundColor =
+      bgColors[location.pathname];
   }, [location]);
 
   return (
@@ -66,6 +66,11 @@ const Navbar = () => {
         </div>
       </div>
       <nav className={hamburguer ? "active" : ""}>
+        <div className="stars">
+          {new Array(15).fill(0).map((_, i) => (
+            <div className="star"></div>
+          ))}
+        </div>
         <div className="menu-container">
           <ul>
             <li style={{"--clr": "#EEEEEE"}}>

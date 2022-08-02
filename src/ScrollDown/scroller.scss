@@ -1,7 +1,7 @@
 .scroller-up {
   position: absolute;
   top: 6.5rem;
-  left: 0.5rem;
+  left: 1rem;
   i {
     font-size: 2rem;
     color: white;
@@ -11,9 +11,9 @@
 .scroller-down {
   z-index: 99999;
   position: absolute;
-  bottom: 0;
+  bottom: 1rem;
   &.no-home {
-    left: 0.5rem;
+    left: 1rem;
   }
   i {
     font-size: 2rem;

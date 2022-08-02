@@ -1,20 +1,21 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import anime from "animejs/lib/anime.es.js";
 import {ReactComponent as Name} from "../logoName.svg";
 import {ReactComponent as Tree} from "../tree.svg";
 import "./home.scss";
-import {useNavigate, useLocation} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
-
-const boxVariant = {
-  visible: {opacity: 1, y: "0"},
-  hidden: {opacity: 0, y: "-100%"},
-};
+import {useSelector, useDispatch} from "react-redux/es/exports";
+import {scrollDown} from "../Redux/stateChanger";
 
 const Home = () => {
   const navigate = useNavigate();
+  const variant = useSelector((state) => state.stateChanger.animation);
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    console.log("Home=> ", variant);
     anime({
       targets: "#Layer_1 path",
       strokeDashoffset: [anime.setDashoffset, 0],
@@ -28,11 +29,12 @@ const Home = () => {
     const listener = (e) => {
       if (e.deltaY > 0) {
         navigate("/Projects");
+        dispatch(scrollDown());
         elmt.removeEventListener("wheel", listener);
       }
     };
     elmt.addEventListener("wheel", listener);
-  }, [navigate]);
+  }, [navigate, dispatch, variant]);
   const control = useAnimation();
   const [ref, inView] = useInView();
   useEffect(() => {
@@ -47,7 +49,7 @@ const Home = () => {
     <motion.section
       className="home-container"
       ref={ref}
-      variants={boxVariant}
+      variants={variant}
       initial="hidden"
       animate={control}
       exit="exit"

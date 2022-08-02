@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./loader.scss";
 import {useState, useEffect} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import {wrap} from "popmotion";
@@ -28,19 +29,31 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
+const Loader = () => {
+  return (
+    <div className="loader">
+      <div className="progress-load"></div>
+    </div>
+  );
+};
 export const Slider = ({images}) => {
   const [[page, direction], setPage] = useState([0, 0]);
   const imageIndex = wrap(0, images.length, page);
-
+  const [load, setLoad] = useState(new Array(images.length).fill(false));
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
   return (
     <>
       <AnimatePresence initial={false} custom={direction}>
+        {!load[imageIndex] && <Loader />}
         <motion.img
           key={page}
           src={images[imageIndex]}
+          onLoad={() =>
+            setLoad(load.map((l, i) => (i === imageIndex ? true : l)))
+          }
+          className="slider-image"
           custom={direction}
           variants={variants}
           initial="enter"

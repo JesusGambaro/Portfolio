@@ -6,6 +6,8 @@ import emailjs from "emailjs-com";
 import {useForm} from "react-hook-form";
 import {ScrollerTop, ScrollerBottom} from "../ScrollDown/Scroller";
 import {Map, Marker, ZoomControl} from "pigeon-maps";
+import {useSelector, useDispatch} from "react-redux/es/exports";
+import {scrollUp, scrollDown} from "../Redux/stateChanger";
 
 import "./contact.scss";
 const boxVariant = {
@@ -15,6 +17,9 @@ const boxVariant = {
 const Contact = () => {
   const navigate = useNavigate();
   const form = useRef();
+  const variant = useSelector((state) => state.stateChanger.animation);
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -46,12 +51,13 @@ const Contact = () => {
     const listener = (e) => {
       if (e.deltaY < 0) {
         window.scrollTo({top: 0});
+        dispatch(scrollUp());
         navigate("/AboutMe");
         elmt.removeEventListener("wheel", listener);
       }
     };
     elmt.addEventListener("wheel", listener);
-  }, [navigate]);
+  }, [navigate, dispatch]);
   const control = useAnimation();
   const [ref, inView] = useInView();
 
@@ -83,9 +89,10 @@ const Contact = () => {
     <motion.section
       className="contact-container"
       ref={ref}
-      variants={boxVariant}
+      variants={variant}
       initial="hidden"
       animate={control}
+      exit="exit"
       transition={{
         x: {type: "spring", stiffness: 50},
         y: {type: "spring", stiffness: 50},
