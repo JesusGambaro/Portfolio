@@ -69,6 +69,16 @@ main {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      &::after{
+        content: 'Scroll Down';
+        color: #23c483;
+        word-wrap: normal;
+        font-size: 1rem;
+        white-space: nowrap;
+        word-spacing: normal;
+        position: absolute;
+        top: -2rem;
+      }
       &::before {
         content: "";
         position: absolute;

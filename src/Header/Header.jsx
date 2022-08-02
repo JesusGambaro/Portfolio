@@ -2,14 +2,14 @@ import "./header.scss";
 import {ReactComponent as Logo} from "../logoName.svg";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import {NavLink} from "react-router-dom";
-
+import {NavLink, useNavigate} from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
   const [hamburguer, setHamburguer] = useState(false);
   const style = {
     color: "white",
   };
-
+  const [height, setHeight] = useState(0);
   const location = useLocation();
   const bgColors = {
     "/": "#000000",
@@ -17,6 +17,7 @@ const Navbar = () => {
     "/AboutMe": "#FF0063",
     "/Contact": "#47029c",
   };
+
   useEffect(() => {
     if (location.pathname !== "/") {
       const logoIcon = document.querySelectorAll(".st0");
@@ -25,6 +26,7 @@ const Navbar = () => {
       });
     }
   }, [location]);
+
   return (
     <header style={{"--bg-color": bgColors[location.pathname]}}>
       <NavLink to="/">
@@ -76,7 +78,7 @@ const Navbar = () => {
                 &nbsp;Home
               </NavLink>
             </li>
-            
+
             <li style={{"--clr": "#91C483"}}>
               <NavLink
                 className={

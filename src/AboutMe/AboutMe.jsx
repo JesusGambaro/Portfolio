@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
+import {ScrollerTop, ScrollerBottom} from "../ScrollDown/Scroller";
+
 import "./about-me.scss";
 const boxVariant = {
   visible: {opacity: 1, y: "0"},
@@ -13,9 +15,14 @@ const AboutMe = () => {
     const elmt = document.getElementsByClassName("about-me-container")[0];
     const listener = (e) => {
       if (e.deltaY < 0) {
+        window.scrollTo({top: 0});
         navigate("/Projects");
         elmt.removeEventListener("wheel", listener);
-      } else if (e.deltaY > 0) navigate("/Contact");
+      } else if (e.deltaY > 0) {
+        window.scrollTo({top: 0});
+        navigate("/Contact");
+        elmt.removeEventListener("wheel", listener);
+      }
     };
     elmt.addEventListener("wheel", listener);
   });
@@ -57,6 +64,20 @@ const AboutMe = () => {
     {name: "Heroku", url: "https://www.heroku.com/"},
     {name: "Git", url: "https://git-scm.com/"},
   ];
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
   return (
     <motion.section
       className="about-me-container"
@@ -70,6 +91,7 @@ const AboutMe = () => {
         default: {duration: ".75"},
       }}
     >
+      {isMobile && <ScrollerTop />}
       <div className="description-container">
         <h1>Skills & Experecience</h1>
         <p>
@@ -113,7 +135,7 @@ const AboutMe = () => {
           <h2>Certifications</h2>
           <div className="slides">
             {popImg.map((img, i) => (
-              <>
+              <div key={img.src}>
                 <img
                   key={"thumbnail " + i}
                   src={img.src}
@@ -134,17 +156,7 @@ const AboutMe = () => {
                   key={"figure " + i}
                   className={img.show ? "big-img" : ""}
                 >
-                  <img
-                    src={img.src}
-                    alt="henry"
-                    /* onClick={() =>
-                      setPopImg(
-                        popImg.map((e, ix) =>
-                          ix === i ? {...e, show: false} : e
-                        )
-                      )
-                    } */
-                  />
+                  <img src={img.src} alt="henry" />
                   {img.show && (
                     <button
                       className="close-c-btn"
@@ -157,15 +169,16 @@ const AboutMe = () => {
                         )
                       }
                     >
-                      <i class="bi bi-x-square"></i>
+                      <i className="bi bi-x-square"></i>
                     </button>
                   )}
                 </figure>
-              </>
+              </div>
             ))}
           </div>
         </div>
       </div>
+      {isMobile && <ScrollerBottom />}
     </motion.section>
   );
 };

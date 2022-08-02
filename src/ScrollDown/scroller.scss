@@ -1,0 +1,22 @@
+.scroller-up {
+  position: absolute;
+  top: 6.5rem;
+  left: 0.5rem;
+  i {
+    font-size: 2rem;
+    color: white;
+  }
+  z-index: 99999;
+}
+.scroller-down {
+  z-index: 99999;
+  position: absolute;
+  bottom: 0;
+  &.no-home {
+    left: 0.5rem;
+  }
+  i {
+    font-size: 2rem;
+    color: white;
+  }
+}

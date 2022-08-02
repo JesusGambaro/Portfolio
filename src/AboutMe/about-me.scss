@@ -11,8 +11,11 @@
   }
   .skills-container {
     width: 50%;
+    h2{
+      font-size: 1.7rem;
+    }
     .thumbnail {
-      height: 8rem;
+      height: 7rem;
     }
 
     .certification .slides {
@@ -21,6 +24,7 @@
           height: 0rem;
         }
         &.big-img {
+          top: calc(50% + 2.5rem);
           img {
             height: 30rem;
           }
@@ -32,7 +36,7 @@
       li {
         flex: 1 1 20%;
         img {
-          width: 3rem;
+          width: 2.5rem;
         }
       }
     }
@@ -55,6 +59,7 @@
         height: 0rem;
       }
       &.big-img {
+        top: calc(50% + 1rem);
         img {
           height: 30rem;
         }
@@ -111,6 +116,8 @@
           height: 0rem;
         }
         &.big-img {
+          bottom: 0;
+          top: 85%;
           img {
             height: 15rem;
           }
@@ -227,6 +234,7 @@
       justify-content: space-evenly;
       align-items: center;
       .thumbnail {
+        border-radius: 0.1rem;
         margin: 1rem 0;
         box-shadow: 0 0 0 1rem #1d1d1d65;
         transition: 0.3s;
@@ -237,12 +245,13 @@
         img {
           cursor: pointer;
         }
+        transform-origin: left;
         &.big-img {
-          top: calc(50% + 1rem);
           left: 50%;
           transform: translate(-50%, -50%);
-          transition: 0.3s ease-in-out;
+          transition: 0.3s ease;
           img {
+            border-radius: 0.1rem;
             box-shadow: 0 0 0 1rem #1d1d1d65;
           }
         }

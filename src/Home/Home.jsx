@@ -3,7 +3,7 @@ import anime from "animejs/lib/anime.es.js";
 import {ReactComponent as Name} from "../logoName.svg";
 import {ReactComponent as Tree} from "../tree.svg";
 import "./home.scss";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
 
@@ -53,7 +53,7 @@ const Home = () => {
       exit="exit"
       transition={{
         x: {type: "spring", stiffness: 50},
-        y: {type: "spring", stiffness: 50},  
+        y: {type: "spring", stiffness: 50},
         default: {duration: ".75"},
       }}
     >

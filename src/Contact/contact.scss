@@ -1,4 +1,4 @@
-@media (max-width:  1399.98px) {
+@media (max-width: 1399.98px) {
   .contact-container {
     padding-bottom: 2rem;
   }
@@ -22,13 +22,7 @@
       }
     }
     .map-container {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      iframe {
-        margin-left: 3rem;
-      }
+      margin-left: 1rem;
     }
   }
 }

@@ -4,6 +4,9 @@ import {motion, useAnimation} from "framer-motion";
 import {useInView} from "react-intersection-observer";
 import emailjs from "emailjs-com";
 import {useForm} from "react-hook-form";
+import {ScrollerTop, ScrollerBottom} from "../ScrollDown/Scroller";
+import {Map, Marker, ZoomControl} from "pigeon-maps";
+
 import "./contact.scss";
 const boxVariant = {
   visible: {opacity: 1, y: "0"},
@@ -42,6 +45,7 @@ const Contact = () => {
     const elmt = document.getElementsByClassName("contact-container")[0];
     const listener = (e) => {
       if (e.deltaY < 0) {
+        window.scrollTo({top: 0});
         navigate("/AboutMe");
         elmt.removeEventListener("wheel", listener);
       }
@@ -61,6 +65,20 @@ const Contact = () => {
   const [send, setSend] = useState(false);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState("Copy?");
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
   return (
     <motion.section
       className="contact-container"
@@ -74,6 +92,7 @@ const Contact = () => {
         default: {duration: ".75"},
       }}
     >
+      {isMobile && <ScrollerTop />}
       <div className="form-container">
         <h1>Contact Me</h1>
         <form ref={form} onSubmit={handleSubmit(sendEmail)}>
@@ -212,15 +231,17 @@ const Contact = () => {
             </p>
           </span>
         </span>
-        <iframe
-          id="gmap_canvas"
-          src="https://maps.google.com/maps?q=Guaymallen%20department&t=&z=11&ie=UTF8&iwloc=&output=embed"
-          title="Guaymallen department"
-          onLoad={() => {
-            console.clear();
-          }}
-        ></iframe>
+        <Map
+          height={300}
+          defaultCenter={[-32.902802, -68.8134552, 15]}
+          defaultZoom={5}
+          metaWheelZoom={true}
+        >
+          <ZoomControl />
+          <Marker width={50} anchor={[-32.902802, -68.8134552, 15]} />
+        </Map>
       </div>
+      {isMobile && <ScrollerBottom />}
     </motion.section>
   );
 };
