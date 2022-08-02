@@ -10,6 +10,7 @@ const projects = [
       "https://res.cloudinary.com/dsqpyqpnq/image/upload/v1658077860/Portfolio/Portfolio_4.png",
     ],
     link: "https://portfolio-jesusgambaro.vercel.app/",
+    github: "https://github.com/JesusGambaro/Portfolio",
     tools: ["React", "Typescript", "Sass", "HTML", "CSS"],
   },
   {
